@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdbool.h> 
+
+int main() {
+    int contas[100] = {
+        1001, 1002, 1003, /* ... adicionar os outros números de contas aqui */
+    };
+    int conta_procurada;
+    bool conta_encontrada = false;
+
+    printf("Digite o número da conta que você quer encontrar: ");
+    scanf("%d", &conta_procurada);
+
+    for (int i = 0; i < 100; i++) {
+        if (contas[i] == conta_procurada) {
+            conta_encontrada = true;
+            break;
+        }
+    }
+
+    if (conta_encontrada) {
+        printf("A conta %d foi encontrada!\n", conta_procurada);
+    } else {
+        printf("A conta %d não foi encontrada.\n", conta_procurada);
+    }
+
+    return 0;
+}

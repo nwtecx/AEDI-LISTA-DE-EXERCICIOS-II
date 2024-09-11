@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+#define NUM_PALAVRAS 5
+#define TAM_PALAVRA 20
+
+int main() {
+
+    char palavras[NUM_PALAVRAS][TAM_PALAVRA] = {"python", "programacao", "computador", "algoritmo", "dados"};
+
+
+    srand(time(NULL));
+    int indice = rand() % NUM_PALAVRAS;
+    char palavra_secreta[TAM_PALAVRA];
+    strcpy(palavra_secreta, palavras[indice]);
+
+    int tamanho = strlen(palavra_secreta);
+    int vidas = tamanho + 2;
+    char letras_acertadas[TAM_PALAVRA];
+    memset(letras_acertadas, '_', tamanho);
+    letras_acertadas[tamanho] = '\0'; 
+
+    while (vidas > 0 && strcmp(palavra_secreta, letras_acertadas) != 0) {
+        printf("Palavra: %s\n", letras_acertadas);
+        printf("Vidas: %d\n", vidas);
+
+        char chute;
+        printf("Digite uma letra: ");
+        scanf(" %c", &chute);
+
+        if (chute < 'a' || chute > 'z') {
+            printf("Por favor, digite uma letra válida.\n");
+            continue;
+        }
+
+        int acertou = 0;
+        for (int i = 0; i < tamanho; i++) {
+            if (palavra_secreta[i] == chute) {
+                letras_acertadas[i] = chute;
+                acertou = 1;
+            }
+        }
+
+        if (!acertou) {
+            vidas--;
+            printf("Letra incorreta!\n");
+        }
+    }
+
+    if (vidas == 0) {
+        printf("Você perdeu! A palavra era: %s\n", palavra_secreta);
+    } else {
+        printf("Parabéns, você venceu!\n");
+    }
+
+    return 0;
+}

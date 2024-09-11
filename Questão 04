@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+// Função para verificar se um número é primo
+bool eh_primo(int num) {
+    if (num <= 1) return false;
+    if (num == 2) return true;
+    if (num % 2 == 0) return false;
+    for (int i = 3; i * i <= num; i += 2) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
+
+// Função para preencher o array com números primos de 1 a 100
+void preencher_primos(int primos[], int *tamanho) {
+    *tamanho = 0;
+    for (int i = 1; i <= 100; i++) {
+        if (eh_primo(i)) {
+            primos[(*tamanho)++] = i;
+        }
+    }
+}
+
+// Função de busca binária
+bool busca_binaria(int arr[], int tamanho, int chave) {
+    int baixo = 0;
+    int alto = tamanho - 1;
+
+    while (baixo <= alto) {
+        int meio = baixo + (alto - baixo) / 2;
+
+        if (arr[meio] == chave) {
+            return true;
+        } else if (arr[meio] < chave) {
+            baixo = meio + 1;
+        } else {
+            alto = meio - 1;
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    int primos[100];
+    int tamanho_primos;
+    int numero;
+
+    preencher_primos(primos, &tamanho_primos);
+
+    printf("Digite um número entre 1 e 100: ");
+    scanf("%d", &numero);
+
+    if (numero < 1 || numero > 100) {
+        printf("Número fora do intervalo permitido (1 a 100).\n");
+        return 1;
+    }
+
+    if (busca_binaria(primos, tamanho_primos, numero)) {
+        printf("O número %d é primo e foi encontrado na lista!\n", numero);
+    } else {
+        printf("O número %d não é primo ou não foi encontrado na lista.\n", numero);
+    }
+
+    return 0;
+}

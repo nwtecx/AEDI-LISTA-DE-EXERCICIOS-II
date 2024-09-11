@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NUM_CRIANCAS 50
+#define MAX_NOTA 5
+
+int main() {
+    int notas[NUM_CRIANCAS];
+    int contagem_notas[MAX_NOTA] = {0}; 
+
+    srand(time(NULL));
+
+    for (int i = 0; i < NUM_CRIANCAS; i++) {
+        notas[i] = rand() % MAX_NOTA + 1; 
+    }
+
+    for (int i = 0; i < NUM_CRIANCAS; i++) {
+        int nota = notas[i];
+        contagem_notas[nota - 1]++; 
+    }
+
+    printf("Resultados da pesquisa:\n");
+    for (int i = 0; i < MAX_NOTA; i++) {
+        printf("Nota %d: %d votos\n", i + 1, contagem_notas[i]);
+    }
+
+    return 0;
+}
