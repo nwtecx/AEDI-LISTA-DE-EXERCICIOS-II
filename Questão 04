@@ -12,7 +12,6 @@ bool eh_primo(int num) {
     return true;
 }
 
-// Função para preencher o array com números primos de 1 a 100
 void preencher_primos(int primos[], int *tamanho) {
     *tamanho = 0;
     for (int i = 1; i <= 100; i++) {
@@ -22,7 +21,6 @@ void preencher_primos(int primos[], int *tamanho) {
     }
 }
 
-// Função de busca binária
 bool busca_binaria(int arr[], int tamanho, int chave) {
     int baixo = 0;
     int alto = tamanho - 1;
